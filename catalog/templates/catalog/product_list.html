@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+{% load static humanize %}
+{% block content %}
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+    {% for product in object_list %}
+    <div class="rounded overflow-hidden shadow-lg">
+        <a href="{% url 'catalog:product_detail' product.id %}">
+            <img class="w-full" src="{{ product.image.url }}" alt="{{ product.name }}">
+        </a>
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">{{ product.name }}</div>
+            <p class="text-gray-700 text-base">
+            {{ product.short_description }}
+            </p>
+            <p class="text-gray-900 text-base">
+            COP $ {{ product.price|intcomma }}
+            </p>
+        </div>       
+    </div> 
+    {% endfor %}
+</div>
+{% endblock %}
